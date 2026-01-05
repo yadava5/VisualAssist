@@ -58,7 +58,7 @@
 <sub>Depth Sensing</sub>
 </td>
 <td align="center" width="25%">
-<img width="60" src="https://developer.apple.com/assets/elements/icons/vision/vision-96x96_2x.png" alt="Vision"><br>
+<img width="60" src="Assets/vision-icon.svg" alt="Vision"><br>
 <strong>Vision</strong><br>
 <sub>Text Recognition</sub>
 </td>
