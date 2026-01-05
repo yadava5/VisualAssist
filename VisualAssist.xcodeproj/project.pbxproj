@@ -1,0 +1,511 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A001 /* VisualAssistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001 /* VisualAssistApp.swift */; };
+		A002 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B002 /* AppState.swift */; };
+		A003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003 /* ContentView.swift */; };
+		A004 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B004 /* HomeView.swift */; };
+		A005 /* NavigationModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005 /* NavigationModeView.swift */; };
+		A006 /* TextReadingModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B006 /* TextReadingModeView.swift */; };
+		A007 /* ObjectAwarenessModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B007 /* ObjectAwarenessModeView.swift */; };
+		A008 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008 /* SettingsView.swift */; };
+		A009 /* AccessibleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B009 /* AccessibleButton.swift */; };
+		A010 /* ModeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B010 /* ModeCard.swift */; };
+		A011 /* StatusOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B011 /* StatusOverlay.swift */; };
+		A012 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012 /* CameraPreview.swift */; };
+		A013 /* LiDARService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B013 /* LiDARService.swift */; };
+		A014 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014 /* CameraService.swift */; };
+		A015 /* TextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015 /* TextRecognitionService.swift */; };
+		A016 /* ObjectDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B016 /* ObjectDetectionService.swift */; };
+		A017 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B017 /* SpeechService.swift */; };
+		A018 /* VoiceCommandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B018 /* VoiceCommandService.swift */; };
+		A019 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019 /* HapticService.swift */; };
+		A020 /* DetectedObstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B020 /* DetectedObstacle.swift */; };
+		A021 /* RecognizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B021 /* RecognizedText.swift */; };
+		A022 /* DetectedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B022 /* DetectedObject.swift */; };
+		A023 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B023 /* UserSettings.swift */; };
+		A024 /* DepthProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024 /* DepthProcessor.swift */; };
+		A025 /* SpatialAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B025 /* SpatialAudioManager.swift */; };
+		A026 /* AccessibilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B026 /* AccessibilityHelper.swift */; };
+		A027 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B027 /* Assets.xcassets */; };
+		A028 /* DeviceLevelIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B029 /* DeviceLevelIndicator.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B000 /* VisualAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisualAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B001 /* VisualAssistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualAssistApp.swift; sourceTree = "<group>"; };
+		B002 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B003 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B004 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B005 /* NavigationModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModeView.swift; sourceTree = "<group>"; };
+		B006 /* TextReadingModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReadingModeView.swift; sourceTree = "<group>"; };
+		B007 /* ObjectAwarenessModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectAwarenessModeView.swift; sourceTree = "<group>"; };
+		B008 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B009 /* AccessibleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleButton.swift; sourceTree = "<group>"; };
+		B010 /* ModeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeCard.swift; sourceTree = "<group>"; };
+		B011 /* StatusOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOverlay.swift; sourceTree = "<group>"; };
+		B012 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		B013 /* LiDARService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiDARService.swift; sourceTree = "<group>"; };
+		B014 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		B015 /* TextRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognitionService.swift; sourceTree = "<group>"; };
+		B016 /* ObjectDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetectionService.swift; sourceTree = "<group>"; };
+		B017 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
+		B018 /* VoiceCommandService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCommandService.swift; sourceTree = "<group>"; };
+		B019 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
+		B020 /* DetectedObstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedObstacle.swift; sourceTree = "<group>"; };
+		B021 /* RecognizedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizedText.swift; sourceTree = "<group>"; };
+		B022 /* DetectedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedObject.swift; sourceTree = "<group>"; };
+		B023 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		B024 /* DepthProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthProcessor.swift; sourceTree = "<group>"; };
+		B025 /* SpatialAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialAudioManager.swift; sourceTree = "<group>"; };
+		B026 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
+		B027 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B029 /* DeviceLevelIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLevelIndicator.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D000 = {
+			isa = PBXGroup;
+			children = (
+				D001 /* VisualAssist */,
+				D002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D001 /* VisualAssist */ = {
+			isa = PBXGroup;
+			children = (
+				D003 /* App */,
+				D004 /* Views */,
+				D005 /* Services */,
+				D006 /* Models */,
+				D007 /* Utilities */,
+				D008 /* Resources */,
+				B028 /* Info.plist */,
+			);
+			path = VisualAssist;
+			sourceTree = "<group>";
+		};
+		D002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B000 /* VisualAssist.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B001 /* VisualAssistApp.swift */,
+				B002 /* AppState.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D004 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B003 /* ContentView.swift */,
+				B004 /* HomeView.swift */,
+				B005 /* NavigationModeView.swift */,
+				B006 /* TextReadingModeView.swift */,
+				B007 /* ObjectAwarenessModeView.swift */,
+				B008 /* SettingsView.swift */,
+				B029 /* DeviceLevelIndicator.swift */,
+				D009 /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D005 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B013 /* LiDARService.swift */,
+				B014 /* CameraService.swift */,
+				B015 /* TextRecognitionService.swift */,
+				B016 /* ObjectDetectionService.swift */,
+				B017 /* SpeechService.swift */,
+				B018 /* VoiceCommandService.swift */,
+				B019 /* HapticService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D006 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B020 /* DetectedObstacle.swift */,
+				B021 /* RecognizedText.swift */,
+				B022 /* DetectedObject.swift */,
+				B023 /* UserSettings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D007 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B024 /* DepthProcessor.swift */,
+				B025 /* SpatialAudioManager.swift */,
+				B026 /* AccessibilityHelper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		D008 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B027 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D009 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B009 /* AccessibleButton.swift */,
+				B010 /* ModeCard.swift */,
+				B011 /* StatusOverlay.swift */,
+				B012 /* CameraPreview.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E001 /* VisualAssist */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F001 /* Build configuration list for PBXNativeTarget "VisualAssist" */;
+			buildPhases = (
+				E002 /* Sources */,
+				E003 /* Resources */,
+				C001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VisualAssist;
+			productName = VisualAssist;
+			productReference = B000 /* VisualAssist.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					E001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = F002 /* Build configuration list for PBXProject "VisualAssist" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D000;
+			productRefGroup = D002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E001 /* VisualAssist */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A027 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A001 /* VisualAssistApp.swift in Sources */,
+				A002 /* AppState.swift in Sources */,
+				A003 /* ContentView.swift in Sources */,
+				A004 /* HomeView.swift in Sources */,
+				A005 /* NavigationModeView.swift in Sources */,
+				A006 /* TextReadingModeView.swift in Sources */,
+				A007 /* ObjectAwarenessModeView.swift in Sources */,
+				A008 /* SettingsView.swift in Sources */,
+				A009 /* AccessibleButton.swift in Sources */,
+				A010 /* ModeCard.swift in Sources */,
+				A011 /* StatusOverlay.swift in Sources */,
+				A012 /* CameraPreview.swift in Sources */,
+				A013 /* LiDARService.swift in Sources */,
+				A014 /* CameraService.swift in Sources */,
+				A015 /* TextRecognitionService.swift in Sources */,
+				A016 /* ObjectDetectionService.swift in Sources */,
+				A017 /* SpeechService.swift in Sources */,
+				A018 /* VoiceCommandService.swift in Sources */,
+				A019 /* HapticService.swift in Sources */,
+				A020 /* DetectedObstacle.swift in Sources */,
+				A021 /* RecognizedText.swift in Sources */,
+				A022 /* DetectedObject.swift in Sources */,
+				A023 /* UserSettings.swift in Sources */,
+				A024 /* DepthProcessor.swift in Sources */,
+				A025 /* SpatialAudioManager.swift in Sources */,
+				A026 /* AccessibilityHelper.swift in Sources */,
+				A028 /* DeviceLevelIndicator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		G001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 8454LWQ8V2;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		G002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8454LWQ8V2;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		G003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VisualAssist/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Visual Assist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is needed to detect obstacles, read text, and identify objects";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone is needed for voice commands";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition is needed for voice commands";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visualassist.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		G004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VisualAssist/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Visual Assist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is needed to detect obstacles, read text, and identify objects";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone is needed for voice commands";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition is needed for voice commands";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visualassist.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F001 /* Build configuration list for PBXNativeTarget "VisualAssist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G003 /* Debug */,
+				G004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F002 /* Build configuration list for PBXProject "VisualAssist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G001 /* Debug */,
+				G002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E000 /* Project object */;
+}

@@ -1,0 +1,36 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007AFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5856D6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="224" fill="url(#bg-gradient)"/>
+  
+  <!-- Radiating waves (LiDAR representation) -->
+  <circle cx="512" cy="512" r="420" stroke="url(#wave-gradient)" stroke-width="3" fill="none" opacity="0.4"/>
+  <circle cx="512" cy="512" r="350" stroke="url(#wave-gradient)" stroke-width="3" fill="none" opacity="0.5"/>
+  <circle cx="512" cy="512" r="280" stroke="url(#wave-gradient)" stroke-width="3" fill="none" opacity="0.6"/>
+  
+  <!-- Main eye circle -->
+  <circle cx="512" cy="512" r="200" fill="white"/>
+  
+  <!-- Iris -->
+  <circle cx="512" cy="512" r="120" fill="#007AFF"/>
+  
+  <!-- Pupil -->
+  <circle cx="512" cy="512" r="50" fill="#1a1a2e"/>
+  
+  <!-- Eye highlight -->
+  <circle cx="480" cy="480" r="25" fill="white" opacity="0.8"/>
+  
+  <!-- Small highlight -->
+  <circle cx="540" cy="530" r="10" fill="white" opacity="0.5"/>
+</svg>
