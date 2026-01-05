@@ -12,6 +12,10 @@
 
 <br>
 
+> ⚠️ **BETA VERSION** — This app is currently in active development and testing. Features may change and bugs may exist. [Report issues →](../../issues)
+
+<br>
+
 [![Platform](https://img.shields.io/badge/Platform-iOS%2017.0+-007AFF?style=for-the-badge&logo=apple&logoColor=white)](https://developer.apple.com/ios/)
 [![Swift](https://img.shields.io/badge/Swift-5.9-F05138?style=for-the-badge&logo=swift&logoColor=white)](https://swift.org)
 [![Xcode](https://img.shields.io/badge/Xcode-15+-147EFB?style=for-the-badge&logo=xcode&logoColor=white)](https://developer.apple.com/xcode/)
@@ -19,11 +23,17 @@
 
 <br>
 
+![Beta](https://img.shields.io/badge/Status-BETA-FF9500?style=flat-square&logo=testflight&logoColor=white)
+![Version](https://img.shields.io/badge/Version-0.1.0--beta-007AFF?style=flat-square)
+![Build](https://img.shields.io/badge/Build-Passing-34C759?style=flat-square)
+
+<br>
+
 **[Features](#-features)** · **[Requirements](#-requirements)** · **[Getting Started](#-getting-started)** · **[Architecture](#-architecture)** · **[Privacy](#-privacy)**
 
 <br>
 
-<img src="https://img.shields.io/badge/LiDAR-Required-AF52DE?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQyIDAtOC0zLjU4LTgtOHMzLjU4LTggOC04IDggMy41OCA4IDgtMy41OCA4LTggOHoiLz48L3N2Zz4=" alt="LiDAR Required">
+<img src="https://img.shields.io/badge/LiDAR-Required-AF52DE?style=flat-square" alt="LiDAR Required">
 <img src="https://img.shields.io/badge/ARKit-Powered-FF9500?style=flat-square" alt="ARKit">
 <img src="https://img.shields.io/badge/On--Device%20ML-Private-34C759?style=flat-square" alt="On-Device ML">
 <img src="https://img.shields.io/badge/VoiceOver-Accessible-5856D6?style=flat-square" alt="Accessible">
@@ -43,27 +53,64 @@
 <table>
 <tr>
 <td align="center" width="25%">
-<img width="60" src="https://developer.apple.com/assets/elements/icons/arkit/arkit-128x128_2x.png" alt="ARKit"><br>
+<img width="60" src="https://developer.apple.com/assets/elements/icons/arkit/arkit-96x96_2x.png" alt="ARKit"><br>
 <strong>LiDAR + ARKit</strong><br>
 <sub>Depth Sensing</sub>
 </td>
 <td align="center" width="25%">
-<img width="60" src="https://developer.apple.com/assets/elements/icons/vision/vision-128x128_2x.png" alt="Vision"><br>
+<img width="60" src="https://developer.apple.com/assets/elements/icons/visionos/visionos-96x96_2x.png" alt="Vision"><br>
 <strong>Vision</strong><br>
 <sub>Text Recognition</sub>
 </td>
 <td align="center" width="25%">
-<img width="60" src="https://developer.apple.com/assets/elements/icons/core-ml/core-ml-128x128_2x.png" alt="Core ML"><br>
+<img width="60" src="https://developer.apple.com/assets/elements/icons/core-ml/core-ml-96x96_2x.png" alt="Core ML"><br>
 <strong>Core ML</strong><br>
 <sub>Object Detection</sub>
 </td>
 <td align="center" width="25%">
-<img width="60" src="https://developer.apple.com/assets/elements/icons/swift/swift-128x128_2x.png" alt="Swift"><br>
+<img width="60" src="https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png" alt="SwiftUI"><br>
 <strong>SwiftUI</strong><br>
 <sub>Modern Interface</sub>
 </td>
 </tr>
 </table>
+
+<br>
+
+---
+
+## 🧪 Beta Status
+
+<table>
+<tr>
+<td width="100">
+
+![TestFlight](https://img.shields.io/badge/TestFlight-Beta-007AFF?style=for-the-badge&logo=apple&logoColor=white)
+
+</td>
+<td>
+
+**Visual Assist is currently in beta testing.** 
+
+This means:
+- 🔨 **Active Development** — New features being added regularly
+- 🐛 **Bug Fixes** — Known issues are being addressed
+- 📝 **Feedback Welcome** — Your input helps improve the app
+- ⚠️ **Not Production Ready** — Use with awareness of potential issues
+
+</td>
+</tr>
+</table>
+
+### Known Limitations
+
+| Area | Status | Notes |
+|:-----|:------:|:------|
+| Navigation Mode | ✅ Working | Core functionality complete |
+| Text Reading | ✅ Working | OCR may vary with lighting |
+| Object Detection | 🔄 Testing | Accuracy improvements ongoing |
+| Voice Commands | ✅ Working | English only for now |
+| Apple Watch | �� Planned | Coming in future release |
 
 <br>
 
@@ -196,7 +243,7 @@ AI-powered scene understanding and description.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/VisualAssist.git
+git clone https://github.com/yadava5/VisualAssist.git
 
 # Navigate to project
 cd VisualAssist
@@ -267,7 +314,7 @@ VisualAssist/
 
 ---
 
-## 🔒 Privacy
+## �� Privacy
 
 <div align="center">
 
@@ -390,6 +437,8 @@ xcodebuild docbuild -scheme VisualAssist -derivedDataPath ./docs
 <sub>© 2026 Ayush. All rights reserved.</sub>
 
 <br>
+
+![Beta](https://img.shields.io/badge/🧪_Currently_in_Beta-FF9500?style=for-the-badge)
 
 <sub>Visual Assist is not affiliated with Apple Inc.<br>
 iPhone, LiDAR, ARKit, and other Apple trademarks are property of Apple Inc.</sub>
