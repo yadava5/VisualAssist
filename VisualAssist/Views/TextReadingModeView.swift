@@ -411,8 +411,9 @@ class LiveTextProcessor: ObservableObject {
     private func startBatchTimer() {
         batchTimer?.invalidate()
         batchTimer = Timer.scheduledTimer(withTimeInterval: batchInterval, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
             Task { @MainActor in
-                self?.processBatch()
+                self.processBatch()
             }
         }
     }
