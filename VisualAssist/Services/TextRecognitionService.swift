@@ -39,8 +39,10 @@ class TextRecognitionService: ObservableObject {
     func recognizeText(in image: CGImage) async -> String {
         isProcessing = true
         
-        return await withCheckedContinuation { continuation in
-            textRecognitionQueue.async { [weak self] in
+        return await withCheckedContinuation { [weak self] continuation in
+            let textRecognitionQueue = self?.textRecognitionQueue ?? DispatchQueue(label: "com.visualassist.textrecognition.temp")
+            
+            textRecognitionQueue.async {
                 let request = VNRecognizeTextRequest { request, error in
                     guard error == nil,
                           let observations = request.results as? [VNRecognizedTextObservation] else {
@@ -76,13 +78,16 @@ class TextRecognitionService: ObservableObject {
                         fullText += candidate.string + " "
                     }
                     
+                    let finalBlocks = blocks
+                    let finalText = fullText.trimmingCharacters(in: .whitespacesAndNewlines)
+                    
                     Task { @MainActor in
-                        self?.textBlocks = blocks
-                        self?.lastRecognizedText = fullText.trimmingCharacters(in: .whitespacesAndNewlines)
+                        self?.textBlocks = finalBlocks
+                        self?.lastRecognizedText = finalText
                         self?.isProcessing = false
                     }
                     
-                    continuation.resume(returning: fullText.trimmingCharacters(in: .whitespacesAndNewlines))
+                    continuation.resume(returning: finalText)
                 }
                 
                 // Configure the request

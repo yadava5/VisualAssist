@@ -217,17 +217,45 @@ func createAccessibilityIcon(size: CGFloat) -> NSImage {
     return image
 }
 
-func saveImage(_ image: NSImage, to path: String) {
-    guard let tiffData = image.tiffRepresentation,
-          let bitmap = NSBitmapImageRep(data: tiffData),
-          let pngData = bitmap.representation(using: .png, properties: [:]) else {
+func saveImage(_ image: NSImage, to path: String, targetSize: Int = 1024) {
+    // Create a bitmap representation at exact pixel size
+    guard let bitmapRep = NSBitmapImageRep(
+        bitmapDataPlanes: nil,
+        pixelsWide: targetSize,
+        pixelsHigh: targetSize,
+        bitsPerSample: 8,
+        samplesPerPixel: 4,
+        hasAlpha: true,
+        isPlanar: false,
+        colorSpaceName: .deviceRGB,
+        bytesPerRow: 0,
+        bitsPerPixel: 0
+    ) else {
+        print("Failed to create bitmap rep")
+        return
+    }
+    
+    bitmapRep.size = NSSize(width: targetSize, height: targetSize)
+    
+    NSGraphicsContext.saveGraphicsState()
+    NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmapRep)
+    
+    // Draw the image scaled to the target size
+    image.draw(in: NSRect(x: 0, y: 0, width: targetSize, height: targetSize),
+               from: NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height),
+               operation: .copy,
+               fraction: 1.0)
+    
+    NSGraphicsContext.restoreGraphicsState()
+    
+    guard let pngData = bitmapRep.representation(using: .png, properties: [:]) else {
         print("Failed to create PNG data")
         return
     }
     
     do {
         try pngData.write(to: URL(fileURLWithPath: path))
-        print("✓ Saved: \(path)")
+        print("✓ Saved: \(path) (\(targetSize)x\(targetSize))")
     } catch {
         print("✗ Error saving \(path): \(error)")
     }
@@ -237,8 +265,8 @@ func saveImage(_ image: NSImage, to path: String) {
 print("🎨 Generating Accessibility Person Icon...")
 
 let icon1024 = createAccessibilityIcon(size: 1024)
-saveImage(icon1024, to: "Assets/AppIcon.png")
-saveImage(icon1024, to: "Assets/AppIcon-Preview.png")
-saveImage(icon1024, to: "VisualAssist/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png")
+saveImage(icon1024, to: "Assets/AppIcon.png", targetSize: 1024)
+saveImage(icon1024, to: "Assets/AppIcon-Preview.png", targetSize: 1024)
+saveImage(icon1024, to: "VisualAssist/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png", targetSize: 1024)
 
 print("✅ All icons generated with accessibility walking figure design!")

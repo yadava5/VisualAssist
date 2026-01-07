@@ -247,10 +247,10 @@ final class CameraService: NSObject, ObservableObject, @unchecked Sendable {
         guard permissionGranted else { return }
         
         let session = captureSession
-        sessionQueue.async { [weak self] in
+        sessionQueue.async {
             if !session.isRunning {
                 session.startRunning()
-                DispatchQueue.main.async {
+                Task { @MainActor [weak self] in
                     self?.updateRunning(true)
                 }
             }
@@ -260,10 +260,10 @@ final class CameraService: NSObject, ObservableObject, @unchecked Sendable {
     @MainActor
     func stopSession() {
         let session = captureSession
-        sessionQueue.async { [weak self] in
+        sessionQueue.async {
             if session.isRunning {
                 session.stopRunning()
-                DispatchQueue.main.async {
+                Task { @MainActor [weak self] in
                     self?.updateRunning(false)
                 }
             }
