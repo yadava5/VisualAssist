@@ -3,8 +3,8 @@
 import Cocoa
 import CoreGraphics
 
-// iOS App Icon - Clean Typography with Liquid Glass Effect
-// Minimal "VA" monogram in modern style
+// iOS App Icon - Modern Dark Aesthetic with Subtle Gradients
+// Minimal "VA" monogram with liquid glass effect
 
 func createTypographyIcon(size: CGFloat) -> NSImage {
     let image = NSImage(size: NSSize(width: size, height: size))
@@ -18,25 +18,43 @@ func createTypographyIcon(size: CGFloat) -> NSImage {
     
     let center = CGPoint(x: size / 2, y: size / 2)
     
-    // === DARK BACKGROUND ===
-    context.setFillColor(CGColor(red: 0.06, green: 0.06, blue: 0.08, alpha: 1.0))
-    context.fill(CGRect(x: 0, y: 0, width: size, height: size))
-    
-    // === SUBTLE RADIAL GRADIENT (depth) ===
-    let depthGradient = CGGradient(
+    // === DARK GRADIENT BACKGROUND ===
+    let bgGradient = CGGradient(
         colorsSpace: CGColorSpaceCreateDeviceRGB(),
         colors: [
-            CGColor(red: 0.12, green: 0.12, blue: 0.15, alpha: 1.0),
-            CGColor(red: 0.05, green: 0.05, blue: 0.07, alpha: 1.0),
+            CGColor(red: 0.10, green: 0.07, blue: 0.13, alpha: 1.0),  // Deep purple-black (top)
+            CGColor(red: 0.04, green: 0.04, blue: 0.06, alpha: 1.0),  // Near black (bottom)
         ] as CFArray,
         locations: [0.0, 1.0]
     )!
-    context.drawRadialGradient(depthGradient, startCenter: center, startRadius: 0, endCenter: center, endRadius: size * 0.75, options: [])
+    context.drawLinearGradient(bgGradient, start: CGPoint(x: 0, y: size), end: CGPoint(x: size, y: 0), options: [])
+    
+    // === SUBTLE AMBIENT GLOW (top-left purple) ===
+    let glowGradient = CGGradient(
+        colorsSpace: CGColorSpaceCreateDeviceRGB(),
+        colors: [
+            CGColor(red: 0.6, green: 0.4, blue: 0.85, alpha: 0.12),
+            CGColor(red: 0.6, green: 0.4, blue: 0.85, alpha: 0.0),
+        ] as CFArray,
+        locations: [0.0, 1.0]
+    )!
+    context.drawRadialGradient(glowGradient, startCenter: CGPoint(x: size * 0.2, y: size * 0.8), startRadius: 0, endCenter: CGPoint(x: size * 0.2, y: size * 0.8), endRadius: size * 0.5, options: [])
+    
+    // === SUBTLE AMBIENT GLOW (bottom-right peach) ===
+    let glowGradient2 = CGGradient(
+        colorsSpace: CGColorSpaceCreateDeviceRGB(),
+        colors: [
+            CGColor(red: 0.95, green: 0.5, blue: 0.35, alpha: 0.08),
+            CGColor(red: 0.95, green: 0.5, blue: 0.35, alpha: 0.0),
+        ] as CFArray,
+        locations: [0.0, 1.0]
+    )!
+    context.drawRadialGradient(glowGradient2, startCenter: CGPoint(x: size * 0.85, y: size * 0.15), startRadius: 0, endCenter: CGPoint(x: size * 0.85, y: size * 0.15), endRadius: size * 0.4, options: [])
     
     // === OUTER GLOW RINGS ===
-    for i in 0..<5 {
-        let r = size * (0.42 + CGFloat(i) * 0.03)
-        let alpha = 0.08 - CGFloat(i) * 0.015
+    for i in 0..<4 {
+        let r = size * (0.42 + CGFloat(i) * 0.035)
+        let alpha = 0.07 - CGFloat(i) * 0.015
         context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: alpha))
         context.setLineWidth(1)
         context.strokeEllipse(in: CGRect(x: center.x - r, y: center.y - r, width: r * 2, height: r * 2))
@@ -53,7 +71,7 @@ func createTypographyIcon(size: CGFloat) -> NSImage {
     let glassGradient = CGGradient(
         colorsSpace: CGColorSpaceCreateDeviceRGB(),
         colors: [
-            CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.12),
+            CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.11),
             CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.02),
         ] as CFArray,
         locations: [0.0, 1.0]
@@ -67,20 +85,14 @@ func createTypographyIcon(size: CGFloat) -> NSImage {
     context.restoreGState()
     
     // Glass border
-    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.25))
-    context.setLineWidth(size * 0.005)
+    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.22))
+    context.setLineWidth(size * 0.004)
     context.strokeEllipse(in: CGRect(x: center.x - glassRadius, y: center.y - glassRadius, width: glassRadius * 2, height: glassRadius * 2))
     
     // Top highlight arc
-    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.18))
-    context.setLineWidth(size * 0.012)
+    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.15))
+    context.setLineWidth(size * 0.01)
     context.addArc(center: center, radius: glassRadius * 0.88, startAngle: CGFloat.pi * 0.55, endAngle: CGFloat.pi * 0.85, clockwise: false)
-    context.strokePath()
-    
-    // Bottom subtle highlight
-    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.06))
-    context.setLineWidth(size * 0.008)
-    context.addArc(center: center, radius: glassRadius * 0.88, startAngle: -CGFloat.pi * 0.3, endAngle: -CGFloat.pi * 0.1, clockwise: false)
     context.strokePath()
     
     // === TYPOGRAPHY: "VA" ===
@@ -102,10 +114,10 @@ func createTypographyIcon(size: CGFloat) -> NSImage {
     
     textString.draw(at: CGPoint(x: textX, y: textY))
     
-    // === SMALL ACCENT DOT (subtle branding element) ===
-    let dotRadius = size * 0.018
+    // === ACCENT DOT (subtle purple tint) ===
+    let dotRadius = size * 0.016
     let dotY = center.y - glassRadius * 0.55
-    context.setFillColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5))
+    context.setFillColor(CGColor(red: 0.8, green: 0.6, blue: 0.95, alpha: 0.6))
     context.fillEllipse(in: CGRect(x: center.x - dotRadius, y: dotY - dotRadius, width: dotRadius * 2, height: dotRadius * 2))
     
     image.unlockFocus()
