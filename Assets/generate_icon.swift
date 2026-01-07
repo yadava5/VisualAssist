@@ -3,8 +3,8 @@
 import Cocoa
 import CoreGraphics
 
-// iOS 26 Liquid Glass Style App Icon - Accessibility Person with Cane
-// Creates a sophisticated layered icon representing visual assistance
+// iOS App Icon - Clean Black & White with Liquid Glass Effect
+// Minimalist accessibility person with cane
 
 func createAccessibilityIcon(size: CGFloat) -> NSImage {
     let image = NSImage(size: NSSize(width: size, height: size))
@@ -18,199 +18,130 @@ func createAccessibilityIcon(size: CGFloat) -> NSImage {
     
     let center = CGPoint(x: size / 2, y: size / 2)
     
-    // === BACKGROUND: Rich gradient ===
-    let backgroundColors = [
-        CGColor(red: 0.0, green: 0.35, blue: 0.85, alpha: 1.0),   // Bright blue
-        CGColor(red: 0.0, green: 0.25, blue: 0.65, alpha: 1.0),   // Medium blue
-        CGColor(red: 0.05, green: 0.15, blue: 0.45, alpha: 1.0),  // Deep blue
-    ]
+    // === DARK BACKGROUND ===
+    context.setFillColor(CGColor(red: 0.08, green: 0.08, blue: 0.10, alpha: 1.0))
+    context.fill(CGRect(x: 0, y: 0, width: size, height: size))
     
-    let bgGradient = CGGradient(
-        colorsSpace: CGColorSpaceCreateDeviceRGB(),
-        colors: backgroundColors as CFArray,
-        locations: [0.0, 0.5, 1.0]
-    )!
-    
-    context.drawLinearGradient(
-        bgGradient,
-        start: CGPoint(x: 0, y: size),
-        end: CGPoint(x: size, y: 0),
-        options: []
-    )
-    
-    // === SCANNING WAVES (representing LiDAR) ===
-    for i in 0..<4 {
-        let waveRadius = size * (0.55 + CGFloat(i) * 0.12)
-        let alpha = 0.25 - (CGFloat(i) * 0.05)
-        
-        context.setStrokeColor(CGColor(red: 0.5, green: 0.8, blue: 1.0, alpha: alpha))
-        context.setLineWidth(size * 0.012)
-        
-        // Draw arc on right side (scanning direction)
-        let arcCenter = CGPoint(x: size * 0.4, y: size * 0.5)
-        context.addArc(center: arcCenter, radius: waveRadius, startAngle: -CGFloat.pi * 0.4, endAngle: CGFloat.pi * 0.4, clockwise: false)
-        context.strokePath()
-    }
-    
-    // === GLASS CIRCLE BACKDROP ===
-    let circleRadius = size * 0.38
-    
-    context.saveGState()
-    context.setShadow(offset: CGSize(width: 0, height: -size * 0.02), blur: size * 0.08, color: CGColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 0.5))
-    
-    let circleGradient = CGGradient(
+    // === SUBTLE RADIAL GRADIENT (depth) ===
+    let depthGradient = CGGradient(
         colorsSpace: CGColorSpaceCreateDeviceRGB(),
         colors: [
-            CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.2),
-            CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.08),
+            CGColor(red: 0.15, green: 0.15, blue: 0.18, alpha: 1.0),
+            CGColor(red: 0.06, green: 0.06, blue: 0.08, alpha: 1.0),
         ] as CFArray,
         locations: [0.0, 1.0]
     )!
+    context.drawRadialGradient(depthGradient, startCenter: center, startRadius: 0, endCenter: center, endRadius: size * 0.7, options: [])
     
-    context.addEllipse(in: CGRect(
-        x: center.x - circleRadius,
-        y: center.y - circleRadius,
-        width: circleRadius * 2,
-        height: circleRadius * 2
-    ))
-    context.clip()
-    context.drawRadialGradient(
-        circleGradient,
-        startCenter: CGPoint(x: center.x - circleRadius * 0.3, y: center.y + circleRadius * 0.3),
-        startRadius: 0,
-        endCenter: center,
-        endRadius: circleRadius,
-        options: []
-    )
-    context.restoreGState()
+    // === LIQUID GLASS CIRCLE ===
+    let glassRadius = size * 0.38
     
-    // Glass circle border
-    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.4))
-    context.setLineWidth(size * 0.008)
-    context.strokeEllipse(in: CGRect(
-        x: center.x - circleRadius,
-        y: center.y - circleRadius,
-        width: circleRadius * 2,
-        height: circleRadius * 2
-    ))
+    // Outer glow rings
+    for i in 0..<4 {
+        let r = glassRadius + CGFloat(i) * size * 0.025
+        let alpha = 0.12 - CGFloat(i) * 0.025
+        context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: alpha))
+        context.setLineWidth(1)
+        context.strokeEllipse(in: CGRect(x: center.x - r, y: center.y - r, width: r * 2, height: r * 2))
+    }
     
-    // === PERSON WITH CANE FIGURE ===
-    let figureScale = size * 0.0028
-    let figureOffsetX = center.x - size * 0.05
-    let figureOffsetY = center.y
-    
+    // Glass fill
     context.saveGState()
-    context.setShadow(offset: CGSize(width: size * 0.01, height: -size * 0.015), blur: size * 0.03, color: CGColor(red: 0, green: 0, blue: 0, alpha: 0.3))
-    
-    // Head
-    let headRadius = 28 * figureScale
-    let headCenter = CGPoint(x: figureOffsetX, y: figureOffsetY + 95 * figureScale)
-    
-    context.setFillColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-    context.fillEllipse(in: CGRect(
-        x: headCenter.x - headRadius,
-        y: headCenter.y - headRadius,
-        width: headRadius * 2,
-        height: headRadius * 2
-    ))
-    
-    // Body
-    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-    context.setLineWidth(12 * figureScale)
-    context.setLineCap(.round)
-    
-    // Torso
-    context.move(to: CGPoint(x: figureOffsetX, y: figureOffsetY + 65 * figureScale))
-    context.addLine(to: CGPoint(x: figureOffsetX, y: figureOffsetY - 10 * figureScale))
-    context.strokePath()
-    
-    // Left arm (extended forward holding cane)
-    context.move(to: CGPoint(x: figureOffsetX, y: figureOffsetY + 45 * figureScale))
-    context.addLine(to: CGPoint(x: figureOffsetX + 35 * figureScale, y: figureOffsetY + 20 * figureScale))
-    context.strokePath()
-    
-    // Right arm (back)
-    context.move(to: CGPoint(x: figureOffsetX, y: figureOffsetY + 45 * figureScale))
-    context.addLine(to: CGPoint(x: figureOffsetX - 30 * figureScale, y: figureOffsetY + 15 * figureScale))
-    context.strokePath()
-    
-    // Left leg (forward)
-    context.move(to: CGPoint(x: figureOffsetX, y: figureOffsetY - 10 * figureScale))
-    context.addLine(to: CGPoint(x: figureOffsetX + 25 * figureScale, y: figureOffsetY - 75 * figureScale))
-    context.strokePath()
-    
-    // Right leg (back)
-    context.move(to: CGPoint(x: figureOffsetX, y: figureOffsetY - 10 * figureScale))
-    context.addLine(to: CGPoint(x: figureOffsetX - 20 * figureScale, y: figureOffsetY - 70 * figureScale))
-    context.strokePath()
-    
-    // Cane
-    context.setLineWidth(8 * figureScale)
-    context.move(to: CGPoint(x: figureOffsetX + 35 * figureScale, y: figureOffsetY + 20 * figureScale))
-    context.addLine(to: CGPoint(x: figureOffsetX + 55 * figureScale, y: figureOffsetY - 85 * figureScale))
-    context.strokePath()
-    
-    // Cane tip (small circle)
-    context.setFillColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-    let tipRadius = 5 * figureScale
-    context.fillEllipse(in: CGRect(
-        x: figureOffsetX + 55 * figureScale - tipRadius,
-        y: figureOffsetY - 85 * figureScale - tipRadius,
-        width: tipRadius * 2,
-        height: tipRadius * 2
-    ))
-    
-    context.restoreGState()
-    
-    // === GLASS HIGHLIGHT ON TOP ===
-    context.saveGState()
-    
-    let highlightPath = CGMutablePath()
-    highlightPath.addEllipse(in: CGRect(
-        x: size * 0.15,
-        y: size * 0.55,
-        width: size * 0.7,
-        height: size * 0.4
-    ))
-    context.addPath(highlightPath)
+    context.addEllipse(in: CGRect(x: center.x - glassRadius, y: center.y - glassRadius, width: glassRadius * 2, height: glassRadius * 2))
     context.clip()
     
-    let highlightGradient = CGGradient(
+    let glassGradient = CGGradient(
         colorsSpace: CGColorSpaceCreateDeviceRGB(),
         colors: [
             CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.15),
-            CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0),
+            CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.03),
         ] as CFArray,
         locations: [0.0, 1.0]
     )!
-    
-    context.drawLinearGradient(
-        highlightGradient,
-        start: CGPoint(x: center.x, y: size),
-        end: CGPoint(x: center.x, y: size * 0.6),
-        options: []
-    )
+    context.drawRadialGradient(glassGradient, 
+        startCenter: CGPoint(x: center.x - glassRadius * 0.3, y: center.y + glassRadius * 0.4), 
+        startRadius: 0, 
+        endCenter: center, 
+        endRadius: glassRadius, 
+        options: [])
     context.restoreGState()
     
-    // === SMALL DOT ACCENTS (representing detected points) ===
-    let dotPositions = [
-        (x: 0.75, y: 0.65, alpha: 0.8),
-        (x: 0.8, y: 0.5, alpha: 0.6),
-        (x: 0.78, y: 0.35, alpha: 0.5),
-        (x: 0.72, y: 0.25, alpha: 0.4),
+    // Glass border
+    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.3))
+    context.setLineWidth(size * 0.006)
+    context.strokeEllipse(in: CGRect(x: center.x - glassRadius, y: center.y - glassRadius, width: glassRadius * 2, height: glassRadius * 2))
+    
+    // Top highlight arc
+    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.2))
+    context.setLineWidth(size * 0.008)
+    context.addArc(center: center, radius: glassRadius * 0.85, startAngle: CGFloat.pi * 0.55, endAngle: CGFloat.pi * 0.85, clockwise: false)
+    context.strokePath()
+    
+    // === WALKING FIGURE ===
+    let figScale = size * 0.0032
+    let figX = center.x
+    let figY = center.y
+    
+    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.95))
+    context.setFillColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.95))
+    context.setLineWidth(12 * figScale)
+    context.setLineCap(.round)
+    
+    // Head
+    let headRadius = 26 * figScale
+    context.fillEllipse(in: CGRect(x: figX - headRadius, y: figY + 70 * figScale, width: headRadius * 2, height: headRadius * 2))
+    
+    // Body
+    context.move(to: CGPoint(x: figX, y: figY + 65 * figScale))
+    context.addLine(to: CGPoint(x: figX, y: figY - 5 * figScale))
+    context.strokePath()
+    
+    // Arms
+    context.move(to: CGPoint(x: figX, y: figY + 45 * figScale))
+    context.addLine(to: CGPoint(x: figX + 35 * figScale, y: figY + 20 * figScale))
+    context.strokePath()
+    
+    context.move(to: CGPoint(x: figX, y: figY + 45 * figScale))
+    context.addLine(to: CGPoint(x: figX - 30 * figScale, y: figY + 15 * figScale))
+    context.strokePath()
+    
+    // Legs
+    context.move(to: CGPoint(x: figX, y: figY - 5 * figScale))
+    context.addLine(to: CGPoint(x: figX + 25 * figScale, y: figY - 70 * figScale))
+    context.strokePath()
+    
+    context.move(to: CGPoint(x: figX, y: figY - 5 * figScale))
+    context.addLine(to: CGPoint(x: figX - 20 * figScale, y: figY - 65 * figScale))
+    context.strokePath()
+    
+    // Cane
+    context.setLineWidth(8 * figScale)
+    context.move(to: CGPoint(x: figX + 35 * figScale, y: figY + 20 * figScale))
+    context.addLine(to: CGPoint(x: figX + 55 * figScale, y: figY - 85 * figScale))
+    context.strokePath()
+    
+    // === SCANNING WAVES (subtle) ===
+    for i in 0..<3 {
+        let waveRadius = size * (0.52 + CGFloat(i) * 0.08)
+        let alpha = 0.1 - CGFloat(i) * 0.03
+        
+        context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: alpha))
+        context.setLineWidth(size * 0.004)
+        context.addArc(center: CGPoint(x: center.x + size * 0.05, y: center.y), radius: waveRadius, startAngle: -CGFloat.pi * 0.35, endAngle: CGFloat.pi * 0.35, clockwise: false)
+        context.strokePath()
+    }
+    
+    // === DETECTION DOTS ===
+    let dotPositions: [(x: CGFloat, y: CGFloat, alpha: CGFloat)] = [
+        (0.72, 0.62, 0.5),
+        (0.76, 0.50, 0.4),
+        (0.74, 0.38, 0.3),
     ]
     
     for dot in dotPositions {
         let dotRadius = size * 0.012
-        let dotCenter = CGPoint(x: size * CGFloat(dot.x), y: size * CGFloat(dot.y))
-        
-        context.setFillColor(CGColor(red: 0.6, green: 0.9, blue: 1.0, alpha: CGFloat(dot.alpha)))
-        context.fillEllipse(in: CGRect(
-            x: dotCenter.x - dotRadius,
-            y: dotCenter.y - dotRadius,
-            width: dotRadius * 2,
-            height: dotRadius * 2
-        ))
+        context.setFillColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: dot.alpha))
+        context.fillEllipse(in: CGRect(x: size * dot.x - dotRadius, y: size * dot.y - dotRadius, width: dotRadius * 2, height: dotRadius * 2))
     }
     
     image.unlockFocus()
