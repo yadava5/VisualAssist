@@ -79,57 +79,19 @@ func createSocialPreview() -> NSImage {
     context.strokePath()
     context.restoreGState()
     
-    // === WALKING FIGURE (white, minimal) ===
-    let figScale: CGFloat = 1.3
-    let figX = glassX
-    let figY = glassY
+    // === VA TYPOGRAPHY (minimal, elegant) ===
+    let vaFont = NSFont.systemFont(ofSize: 140, weight: .semibold)
+    let vaAttrs: [NSAttributedString.Key: Any] = [
+        .font: vaFont,
+        .foregroundColor: NSColor(white: 1.0, alpha: 0.95)
+    ]
+    let vaString = NSAttributedString(string: "VA", attributes: vaAttrs)
+    let vaSize = vaString.size()
+    vaString.draw(at: CGPoint(x: glassX - vaSize.width/2, y: glassY - vaSize.height/2 + 10))
     
-    context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.95))
-    context.setFillColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.95))
-    context.setLineWidth(10 * figScale)
-    context.setLineCap(.round)
-    
-    // Head
-    context.fillEllipse(in: CGRect(x: figX - 22*figScale, y: figY + 65*figScale, width: 44*figScale, height: 44*figScale))
-    
-    // Body
-    context.move(to: CGPoint(x: figX, y: figY + 60*figScale))
-    context.addLine(to: CGPoint(x: figX, y: figY - 15*figScale))
-    context.strokePath()
-    
-    // Arms
-    context.move(to: CGPoint(x: figX, y: figY + 38*figScale))
-    context.addLine(to: CGPoint(x: figX + 38*figScale, y: figY + 15*figScale))
-    context.strokePath()
-    
-    context.move(to: CGPoint(x: figX, y: figY + 38*figScale))
-    context.addLine(to: CGPoint(x: figX - 32*figScale, y: figY + 10*figScale))
-    context.strokePath()
-    
-    // Legs
-    context.move(to: CGPoint(x: figX, y: figY - 15*figScale))
-    context.addLine(to: CGPoint(x: figX + 28*figScale, y: figY - 80*figScale))
-    context.strokePath()
-    
-    context.move(to: CGPoint(x: figX, y: figY - 15*figScale))
-    context.addLine(to: CGPoint(x: figX - 22*figScale, y: figY - 75*figScale))
-    context.strokePath()
-    
-    // Cane
-    context.setLineWidth(7 * figScale)
-    context.move(to: CGPoint(x: figX + 38*figScale, y: figY + 15*figScale))
-    context.addLine(to: CGPoint(x: figX + 60*figScale, y: figY - 95*figScale))
-    context.strokePath()
-    
-    // === SCANNING WAVES ===
-    for i in 0..<4 {
-        let waveRadius: CGFloat = 220 + CGFloat(i) * 50
-        let alpha = 0.12 - CGFloat(i) * 0.025
-        context.setStrokeColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: alpha))
-        context.setLineWidth(1.5)
-        context.addArc(center: CGPoint(x: glassX + 30, y: glassY), radius: waveRadius, startAngle: -CGFloat.pi * 0.35, endAngle: CGFloat.pi * 0.35, clockwise: false)
-        context.strokePath()
-    }
+    // Small accent dot
+    context.setFillColor(CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5))
+    context.fillEllipse(in: CGRect(x: glassX + 55, y: glassY + 60, width: 10, height: 10))
     
     // === TEXT ===
     let textX: CGFloat = width * 0.52
