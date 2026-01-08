@@ -35,6 +35,14 @@
 		A026 /* AccessibilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B026 /* AccessibilityHelper.swift */; };
 		A027 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B027 /* Assets.xcassets */; };
 		A028 /* DeviceLevelIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B029 /* DeviceLevelIndicator.swift */; };
+		T001 /* DetectedObstacleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = T101 /* DetectedObstacleTests.swift */; };
+		T002 /* RecognizedTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = T102 /* RecognizedTextTests.swift */; };
+		T003 /* ObjectCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = T103 /* ObjectCategoryTests.swift */; };
+		T004 /* ObjectPositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = T104 /* ObjectPositionTests.swift */; };
+		T005 /* DepthProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = T105 /* DepthProcessorTests.swift */; };
+		T006 /* AccessibilityHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = T106 /* AccessibilityHelperTests.swift */; };
+		T007 /* CommonObjectLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = T107 /* CommonObjectLabelTests.swift */; };
+		T008 /* DetectionSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = T108 /* DetectionSummaryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,10 +76,26 @@
 		B027 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B029 /* DeviceLevelIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLevelIndicator.swift; sourceTree = "<group>"; };
+		T100 /* VisualAssistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VisualAssistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		T101 /* DetectedObstacleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedObstacleTests.swift; sourceTree = "<group>"; };
+		T102 /* RecognizedTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizedTextTests.swift; sourceTree = "<group>"; };
+		T103 /* ObjectCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCategoryTests.swift; sourceTree = "<group>"; };
+		T104 /* ObjectPositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectPositionTests.swift; sourceTree = "<group>"; };
+		T105 /* DepthProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthProcessorTests.swift; sourceTree = "<group>"; };
+		T106 /* AccessibilityHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelperTests.swift; sourceTree = "<group>"; };
+		T107 /* CommonObjectLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonObjectLabelTests.swift; sourceTree = "<group>"; };
+		T108 /* DetectionSummaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionSummaryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C002 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -85,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				D001 /* VisualAssist */,
+				D010 /* VisualAssistTests */,
 				D002 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				B000 /* VisualAssist.app */,
+				T100 /* VisualAssistTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,6 +215,21 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		D010 /* VisualAssistTests */ = {
+			isa = PBXGroup;
+			children = (
+				T101 /* DetectedObstacleTests.swift */,
+				T102 /* RecognizedTextTests.swift */,
+				T103 /* ObjectCategoryTests.swift */,
+				T104 /* ObjectPositionTests.swift */,
+				T105 /* DepthProcessorTests.swift */,
+				T106 /* AccessibilityHelperTests.swift */,
+				T107 /* CommonObjectLabelTests.swift */,
+				T108 /* DetectionSummaryTests.swift */,
+			);
+			path = VisualAssistTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -209,6 +250,23 @@
 			productReference = B000 /* VisualAssist.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E010 /* VisualAssistTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F003 /* Build configuration list for PBXNativeTarget "VisualAssistTests" */;
+			buildPhases = (
+				E011 /* Sources */,
+				C002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E012 /* PBXTargetDependency */,
+			);
+			name = VisualAssistTests;
+			productName = VisualAssistTests;
+			productReference = T100 /* VisualAssistTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -221,6 +279,10 @@
 				TargetAttributes = {
 					E001 = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					E010 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = E001;
 					};
 				};
 			};
@@ -238,6 +300,7 @@
 			projectRoot = "";
 			targets = (
 				E001 /* VisualAssist */,
+				E010 /* VisualAssistTests */,
 			);
 		};
 /* End PBXProject section */
@@ -254,6 +317,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				T001 /* DetectedObstacleTests.swift in Sources */,
+				T002 /* RecognizedTextTests.swift in Sources */,
+				T003 /* ObjectCategoryTests.swift in Sources */,
+				T004 /* ObjectPositionTests.swift in Sources */,
+				T005 /* DepthProcessorTests.swift in Sources */,
+				T006 /* AccessibilityHelperTests.swift in Sources */,
+				T007 /* CommonObjectLabelTests.swift in Sources */,
+				T008 /* DetectionSummaryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E002 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -289,6 +367,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E012 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E001 /* VisualAssist */;
+			targetProxy = E013 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXContainerItemProxy section */
+		E013 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E001;
+			remoteInfo = VisualAssist;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin XCBuildConfiguration section */
 		G001 /* Debug */ = {
@@ -484,6 +580,46 @@
 			};
 			name = Release;
 		};
+		G005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visualassist.VisualAssistTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VisualAssist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VisualAssist";
+			};
+			name = Debug;
+		};
+		G006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.visualassist.VisualAssistTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VisualAssist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VisualAssist";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -501,6 +637,15 @@
 			buildConfigurations = (
 				G001 /* Debug */,
 				G002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F003 /* Build configuration list for PBXNativeTarget "VisualAssistTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G005 /* Debug */,
+				G006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
