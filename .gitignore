@@ -109,3 +109,6 @@ Temporary Items
 
 # Archive
 *.xcarchive
+
+# Claude Code local settings
+.claude/
