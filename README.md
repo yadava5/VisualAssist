@@ -25,7 +25,7 @@
 
 ![Beta](https://img.shields.io/badge/Status-BETA-FF9500?style=flat-square&logo=testflight&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-0.1.0--beta-007AFF?style=flat-square)
-![Build](https://img.shields.io/badge/Build-Passing-34C759?style=flat-square)
+[![CI](https://github.com/yadava5/VisualAssist/actions/workflows/ci.yml/badge.svg)](https://github.com/yadava5/VisualAssist/actions/workflows/ci.yml)
 
 <br>
 

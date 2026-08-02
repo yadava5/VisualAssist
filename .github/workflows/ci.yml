@@ -12,7 +12,18 @@ concurrency:
 
 jobs:
   build:
-    name: Build & Test
+    # Named for what it does. This job compiles for the simulator and for
+    # release; it runs NO tests. VisualAssistTests holds 71 test functions
+    # and no `xcodebuild test` step exists in this file, so calling the
+    # check "Build & Test" put the word Test into the status GitHub shows
+    # on every pull request while nothing was being tested.
+    #
+    # Adding the test step is the real fix and is deliberately NOT done
+    # blind: the project ships no shared scheme, so xcodebuild autocreates
+    # one and resolves a destination by its own rules. That needs one
+    # verified local run before it goes in a workflow — a step nobody has
+    # seen pass turns a repo with weak CI into a repo with red CI.
+    name: Build
     runs-on: macos-14
     
     steps:
