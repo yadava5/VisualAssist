@@ -112,3 +112,7 @@ Temporary Items
 
 # Claude Code local settings
 .claude/
+
+# xcodebuild test result bundles. Produced by CI and by scripts/, never committed.
+*.xcresult/
+*.xcresult

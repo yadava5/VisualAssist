@@ -12,20 +12,19 @@ concurrency:
 
 jobs:
   build:
-    # Named for what it does. This job compiles for the simulator and for
-    # release; it runs NO tests. VisualAssistTests holds 71 test functions
-    # and no `xcodebuild test` step exists in this file, so calling the
-    # check "Build & Test" put the word Test into the status GitHub shows
-    # on every pull request while nothing was being tested.
+    # This job used to be called "Build & Test" while running no tests at
+    # all — VisualAssistTests held 71 test functions and this file had no
+    # `xcodebuild test` step, so the word "Test" appeared in the check
+    # GitHub shows on every pull request and meant nothing. It was renamed
+    # to "Build", honestly, and the test step was withheld on the grounds
+    # that a step nobody has watched pass turns weak CI into red CI.
     #
-    # Adding the test step is the real fix and is deliberately NOT done
-    # blind: the project ships no shared scheme, so xcodebuild autocreates
-    # one and resolves a destination by its own rules. That needs one
-    # verified local run before it goes in a workflow — a step nobody has
-    # seen pass turns a repo with weak CI into a repo with red CI.
-    name: Build
+    # It has now been watched pass. 2026-08-02, locally, iPhone 17 Pro on
+    # iOS 26.5: 71 passed, 0 failed, 0 skipped. So the step goes in, and
+    # the name goes back to what it can now support.
+    name: Build & Test
     runs-on: macos-14
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -40,7 +39,10 @@ jobs:
       run: xcodebuild -version
 
     - name: Show Available Simulators
-      run: xcrun simctl list devices available | grep -E "iPhone 1[45]|iPhone 16"
+      # `|| true` because this is informational and grep exits 1 when it matches
+      # nothing — which is exactly what happens once the runner image rolls past
+      # the hard-coded model names, failing the job over a diagnostic printout.
+      run: xcrun simctl list devices available | grep -E "iPhone" || true
 
     - name: Build for iOS Simulator
       run: |
@@ -76,6 +78,44 @@ jobs:
           CODE_SIGNING_ALLOWED=NO \
           SWIFT_STRICT_CONCURRENCY=minimal \
           | xcpretty && exit ${PIPESTATUS[0]}
+
+    - name: Resolve a simulator
+      id: sim
+      # Resolve by UDID from whatever the runner actually has, rather than
+      # naming a model. Hard-coding "iPhone 15 Pro" ties this workflow to one
+      # runner image; the images roll forward and the resulting failure reads
+      # like a broken test rather than a missing device.
+      run: |
+        UDID=$(./scripts/resolve-simulator.sh)
+        echo "Using simulator $UDID"
+        echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+
+    - name: Run tests
+      run: |
+        xcodebuild test \
+          -project VisualAssist.xcodeproj \
+          -scheme VisualAssist \
+          -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
+          -resultBundlePath TestResults.xcresult \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO \
+          SWIFT_STRICT_CONCURRENCY=minimal \
+          | xcpretty && exit ${PIPESTATUS[0]}
+
+    - name: Assert the tests actually ran
+      # The logic lives in scripts/assert-test-results.sh so it can be run and
+      # negative-tested on a laptop. A CI gate nobody has watched fail is a gate
+      # nobody knows works.
+      run: ./scripts/assert-test-results.sh TestResults.xcresult 60
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: xcresult
+        path: TestResults.xcresult
+        retention-days: 14
 
   code-analysis:
     name: Code Analysis
