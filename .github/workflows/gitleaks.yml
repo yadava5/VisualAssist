@@ -1,0 +1,36 @@
+name: gitleaks
+
+# Secret scanning over history, not just the diff. A credential committed once
+# and deleted the next day is still in the pack file and still fetchable by
+# anyone who clones -- deleting the file does not unpublish the secret.
+#
+# Findings triaged as non-secrets are allowlisted by value in .gitleaks.toml,
+# individually and with reasons, rather than by excluding paths or disabling
+# rules. Both shortcuts produce a scanner that cannot catch the real thing.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 4 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Scan for secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          # Full history. The default shallow clone would scan one commit and
+          # report clean, which is the failure mode this job exists to avoid.
+          fetch-depth: 0
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

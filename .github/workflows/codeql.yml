@@ -1,0 +1,52 @@
+name: CodeQL
+
+# Static analysis for every language actually present in this repository.
+# Results land in the Security tab and, on a public repo, are visible to anyone
+# reading the project -- which is the point: a scan nobody can see proves
+# nothing to a reader.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Weekly, because the queries improve even when the code does not. A finding
+    # can appear in unchanged code the week after a new query ships.
+    - cron: '0 3 * * 1'
+
+permissions:
+  security-events: write
+  actions: read
+  contents: read
+  packages: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: macos-14
+    strategy:
+      # One language failing should not hide the results for the others.
+      fail-fast: false
+      matrix:
+        language: [swift]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@95e58e9a2cdfd71adc6e0353d5c52f41a045d225
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Autobuild
+        # swift must be compiled for CodeQL to see
+        # anything. Without a build the database is empty and the analysis
+        # succeeds while having examined nothing.
+        if: ${{ matrix.language == 'swift' }}
+        uses: github/codeql-action/autobuild@95e58e9a2cdfd71adc6e0353d5c52f41a045d225
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@95e58e9a2cdfd71adc6e0353d5c52f41a045d225
+        with:
+          category: "/language:${{ matrix.language }}"

@@ -1,0 +1,63 @@
+name: OpenSSF Scorecard
+
+# Scorecard grades this repository against 18 supply-chain checks -- pinned
+# dependencies, branch protection, code review, SAST, dangerous workflow
+# patterns -- and publishes the result at
+#   https://scorecard.dev/viewer/?uri=github.com/yadava5/VisualAssist
+#
+# The value is that it is computed by someone else. A number this project
+# calculates about itself is a claim; a number the OpenSSF publishes about it is
+# evidence, and anyone can re-run it.
+#
+# The first score will be modest, and that is not the workflow failing. Several
+# of the 18 grade repository SETTINGS -- branch protection, signed releases,
+# required review -- which no file in this repo can turn on. The score moving up
+# over time is the better signal than wherever it starts.
+
+on:
+  branch_protection_rule:
+  schedule:
+    - cron: '0 4 * * 1'
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  analysis:
+    name: Scorecard analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write   # upload SARIF to code scanning
+      id-token: write          # OIDC identity for publish_results
+      contents: read
+      actions: read            # several checks enumerate workflows and runs
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          # Scorecard reads repository metadata through the API with its own
+          # token; keeping the checkout credential out of the workspace is one
+          # of the things it grades.
+          persist-credentials: false
+
+      - name: Run Scorecard analysis
+        uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
+
+      - name: Upload SARIF artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: scorecard-sarif
+          path: results.sarif
+          retention-days: 14
+
+      - name: Upload SARIF to code scanning
+        uses: github/codeql-action/upload-sarif@95e58e9a2cdfd71adc6e0353d5c52f41a045d225
+        with:
+          sarif_file: results.sarif
