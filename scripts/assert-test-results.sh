@@ -33,25 +33,63 @@ if [ ! -e "$BUNDLE" ]; then
   exit 1
 fi
 
-xcrun xcresulttool get test-results summary --path "$BUNDLE" \
-  | MINIMUM="$MINIMUM" python3 -c '
+# `xcresulttool get test-results summary` exists only from Xcode 16. GitHub's
+# macos-14 runners ship Xcode 15.x, where the same call dies with
+#   error: unexpected argument test-results
+# and then the parser chokes on an empty stdin, which reads as a test failure
+# rather than a toolchain difference. So: try the modern command, fall back to
+# the legacy schema, and tell the caller which one answered.
+SUMMARY=""
+SCHEMA=""
+if SUMMARY=$(xcrun xcresulttool get test-results summary --path "$BUNDLE" 2>/dev/null) \
+   && [ -n "$SUMMARY" ]; then
+  SCHEMA="modern"
+else
+  # --legacy is required on Xcode 16+ and rejected on 15.x, so try both.
+  SUMMARY=$(xcrun xcresulttool get --legacy --format json --path "$BUNDLE" 2>/dev/null) \
+    || SUMMARY=$(xcrun xcresulttool get --format json --path "$BUNDLE" 2>/dev/null)
+  SCHEMA="legacy"
+fi
+
+if [ -z "$SUMMARY" ]; then
+  echo "FAIL: could not read '$BUNDLE' with any known xcresulttool interface." >&2
+  exit 1
+fi
+
+printf '%s' "$SUMMARY" | MINIMUM="$MINIMUM" SCHEMA="$SCHEMA" python3 -c '
 import json, os, sys
 
 d = json.load(sys.stdin)
-passed  = d.get("passedTests", 0)
-failed  = d.get("failedTests", 0)
-skipped = d.get("skippedTests", 0)
-result  = d.get("result", "?")
 minimum = int(os.environ["MINIMUM"])
+schema = os.environ["SCHEMA"]
 
-for cfg in d.get("devicesAndConfigurations", []):
-    dev = cfg.get("device", {})
-    name = dev.get("deviceName", "?")
-    plat = dev.get("platform", "?")
-    osv  = dev.get("osVersion", "?")
-    print("device: {} - {} {}".format(name, plat, osv))
+if schema == "modern":
+    passed  = d.get("passedTests", 0)
+    failed  = d.get("failedTests", 0)
+    skipped = d.get("skippedTests", 0)
+    result  = d.get("result", "?")
+    for cfg in d.get("devicesAndConfigurations", []):
+        dev = cfg.get("device", {})
+        print("device: {} - {} {}".format(
+            dev.get("deviceName", "?"), dev.get("platform", "?"), dev.get("osVersion", "?")))
+else:
+    # Xcode 15 wraps every scalar as {"_value": "..."} and OMITS the failure and
+    # skip counters entirely when they are zero -- so a missing key means none,
+    # not unknown. `passed` is derived, because this schema reports only a total.
+    def scalar(node, key, default=0):
+        v = node.get(key)
+        if isinstance(v, dict):
+            v = v.get("_value", default)
+        return int(v) if v is not None else default
 
-print(f"passed={passed} failed={failed} skipped={skipped} result={result}")
+    metrics = d.get("metrics", {})
+    total   = scalar(metrics, "testsCount")
+    failed  = scalar(metrics, "testsFailedCount")
+    skipped = scalar(metrics, "testsSkippedCount")
+    passed  = total - failed - skipped
+    result  = "Passed" if failed == 0 else "Failed"
+
+print(f"schema={schema} passed={passed} failed={failed} skipped={skipped} result={result}")
 
 errors = []
 if result != "Passed":
