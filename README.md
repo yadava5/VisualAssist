@@ -314,6 +314,51 @@ VisualAssist/
 
 ---
 
+## 🧪 Testing
+
+`VisualAssistTests` holds **71 tests** across the model and utility layers, and
+they run on every push.
+
+```bash
+scripts/resolve-simulator.sh                    # pick an available iPhone sim
+xcodebuild test -project VisualAssist.xcodeproj -scheme VisualAssist \
+  -destination "platform=iOS Simulator,id=$(scripts/resolve-simulator.sh)" \
+  -resultBundlePath TestResults.xcresult
+scripts/assert-test-results.sh TestResults.xcresult 60
+```
+
+**Latest run: 71 passed, 0 failed, 0 skipped**, verified on iOS 26.5 and again on
+26.2.
+
+Two details in that setup are deliberate, and both exist because of mistakes this
+repository actually made:
+
+- **The suite is asserted, not assumed.** `xcodebuild` exits 0 for a run that
+  executed nothing — no test target attached, a destination matching no tests, a
+  suite skipped wholesale. This project previously shipped a CI check named
+  "Build & Test" that ran no tests at all, green for the life of the branch. The
+  assertion step checks the result bundle for a real pass count, and fails below
+  a floor.
+- **The simulator is resolved, not named.** Hard-coding a device model pins CI to
+  one runner image; the images roll forward, the device disappears, and the
+  failure reads like a broken test rather than a missing one.
+
+| Check | Status |
+| --- | --- |
+| CI (build + 71 tests) | [![CI](https://github.com/yadava5/VisualAssist/actions/workflows/ci.yml/badge.svg)](https://github.com/yadava5/VisualAssist/actions/workflows/ci.yml) |
+| CodeQL (Swift) | [![CodeQL](https://github.com/yadava5/VisualAssist/actions/workflows/codeql.yml/badge.svg)](https://github.com/yadava5/VisualAssist/actions/workflows/codeql.yml) |
+| Secret scanning | [![gitleaks](https://github.com/yadava5/VisualAssist/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/yadava5/VisualAssist/actions/workflows/gitleaks.yml) |
+| Supply chain | [OpenSSF Scorecard](https://scorecard.dev/viewer/?uri=github.com/yadava5/VisualAssist) |
+
+The Scorecard number is computed and published by the OpenSSF, not by this
+repository — which is the point of citing it. Several of its 18 checks grade
+repository *settings* that no file here can change, so the figure starts modest
+and the direction of travel matters more than the starting point.
+
+<br>
+
+---
+
 ## �� Privacy
 
 <div align="center">
