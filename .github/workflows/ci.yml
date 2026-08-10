@@ -138,40 +138,75 @@ jobs:
         grep -rn "TODO\|FIXME" --include="*.swift" VisualAssist/ || echo "None found ✓"
       continue-on-error: true
 
-  accessibility-check:
-    name: Accessibility Compliance
-    runs-on: macos-14
-    
+  # This job used to be called "Accessibility Compliance" and could not fail.
+  # It was `continue-on-error: true` running nothing but echo and grep, so it
+  # printed warnings and reported success no matter what the tree contained —
+  # on a product whose entire purpose is accessibility. A green tick that means
+  # nothing is worse than no job, because it is read as evidence.
+  #
+  # It is now a RATCHET, and it is named for what it measures rather than for
+  # what would be flattering. It does not claim compliance — nothing here
+  # audits against WCAG or Apple's guidance, and the README is explicit that
+  # VoiceOver support, Dynamic Type and High Contrast are NOT in this build.
+  # What it does is refuse to let the current state get worse: the counts below
+  # are the measured baseline, and CI goes red if coverage slips beneath them.
+  accessibility-ratchet:
+    name: Accessibility Ratchet
+    # Pure text analysis — no Xcode, so this does not need a macOS runner.
+    runs-on: ubuntu-latest
+
+    env:
+      # Measured 2026-08-10. Raise these as coverage improves; never lower them
+      # without saying why in the commit message.
+      MIN_MODIFIERS: 53
+      MAX_VIEWS_WITHOUT_LABEL: 1
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      
-    - name: Check Accessibility Labels
+
+    - name: Accessibility coverage may not regress
       run: |
-        echo "## Checking accessibility compliance..."
-        
-        # Count files with accessibility modifiers
-        ACCESSIBLE=$(grep -rl "accessibilityLabel\|accessibilityHint\|accessibilityValue" --include="*.swift" VisualAssist/ | wc -l | tr -d ' ')
-        VIEWS=$(find VisualAssist -name "*View.swift" | wc -l | tr -d ' ')
-        
-        echo "Files with accessibility modifiers: $ACCESSIBLE"
-        echo "Total view files: $VIEWS"
-        
-        # Check for VoiceOver support
-        VOICEOVER=$(grep -rl "VoiceOver\|UIAccessibility\|AXCustomContent" --include="*.swift" VisualAssist/ | wc -l | tr -d ' ')
-        echo "Files with VoiceOver references: $VOICEOVER"
-        
-        # List views without accessibility labels (informational)
+        set -euo pipefail
+        fail=0
+
+        # 1. Total .accessibility* modifiers under Views/ must not drop.
+        #    `|| true` because grep exits 1 on no matches, and under `pipefail`
+        #    that would abort the script with an opaque error at exactly the
+        #    moment the count hit zero — the worst possible time to lose the
+        #    message explaining why.
+        MODIFIERS=$( { grep -rho '\.accessibility[A-Za-z]*' --include='*.swift' VisualAssist/Views/ || true; } | wc -l | tr -d ' ')
+        echo "accessibility modifiers under Views/: $MODIFIERS (floor $MIN_MODIFIERS)"
+        if [ "$MODIFIERS" -lt "$MIN_MODIFIERS" ]; then
+          echo "::error::Accessibility modifiers fell to $MODIFIERS, below the floor of $MIN_MODIFIERS."
+          fail=1
+        fi
+
+        # 2. The set of *View.swift files with no accessibilityLabel may not grow.
+        #    ContentView.swift is the one currently in it: it is the root router
+        #    and holds no interactive controls of its own, which is why the
+        #    ceiling is 1 rather than 0. A SECOND unlabelled view is a real
+        #    regression and fails this job.
+        missing=0
         echo ""
-        echo "## Views to verify accessibility:"
-        for file in $(find VisualAssist -name "*View.swift"); do
+        echo "views without an accessibilityLabel:"
+        while IFS= read -r file; do
           if ! grep -q "accessibilityLabel" "$file"; then
-            echo "  ⚠️  $file - no accessibilityLabel found"
+            echo "  MISSING  $file"
+            missing=$((missing + 1))
           else
-            echo "  ✓  $file"
+            echo "  ok       $file"
           fi
-        done
-      continue-on-error: true
+        done < <(find VisualAssist -name "*View.swift" | sort)
+
+        echo ""
+        echo "views missing a label: $missing (ceiling $MAX_VIEWS_WITHOUT_LABEL)"
+        if [ "$missing" -gt "$MAX_VIEWS_WITHOUT_LABEL" ]; then
+          echo "::error::$missing view files lack an accessibilityLabel, above the ceiling of $MAX_VIEWS_WITHOUT_LABEL."
+          fail=1
+        fi
+
+        exit $fail
 
   documentation:
     name: Documentation Check

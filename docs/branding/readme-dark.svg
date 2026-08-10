@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="200" viewBox="0 0 760 200"
+     role="img" aria-label="Visual Assist. Help visually impaired users navigate their environment safely and independently.">
+  <title>Visual Assist</title>
+  <defs>
+    <radialGradient id="bg" cx="0.32" cy="0.45" r="0.85">
+      <stop offset="0" stop-color="#241d30"/>
+      <stop offset="1" stop-color="#151019"/>
+    </radialGradient>
+    <clipPath id="panel"><rect x="1.5" y="1.5" width="757" height="197" rx="16"/></clipPath>
+  </defs>
+  <style>
+    .name { font: 650 40px ui-sans-serif, -apple-system, "SF Pro Display", "Segoe UI",
+            "Helvetica Neue", Arial, sans-serif; fill: #f2f0f5; letter-spacing: -0.5px; }
+    .desc { font: 400 15px ui-sans-serif, -apple-system, "SF Pro Text", "Segoe UI",
+            "Helvetica Neue", Arial, sans-serif; fill: #c5bdd4; }
+  </style>
+
+  <!-- Aubergine panel and sonar rings from the app icon; sweep is drawn in off-white so nothing depends on color alone. -->
+  <rect x="1.5" y="1.5" width="757" height="197" rx="16" fill="url(#bg)"
+        stroke="rgba(255,255,255,0.09)" stroke-width="1.5"/>
+  <g clip-path="url(#panel)">
+    <g fill="none" stroke="#ffffff">
+      <circle cx="128" cy="100" r="26" stroke-opacity="0.12" stroke-width="1.4"/>
+      <circle cx="128" cy="100" r="52" stroke-opacity="0.10" stroke-width="1.3"/>
+      <circle cx="128" cy="100" r="78" stroke-opacity="0.08" stroke-width="1.2"/>
+      <circle cx="128" cy="100" r="104" stroke-opacity="0.06" stroke-width="1.1"/>
+      <circle cx="128" cy="100" r="130" stroke-opacity="0.045" stroke-width="1"/>
+    </g>
+    <!-- LiDAR sweep arc + return dot -->
+    <path d="M114.5,23.2 A78,78 0 0 1 201.3,73.3" fill="none" stroke="#cfc6e2"
+          stroke-opacity="0.7" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="170.6" cy="70.2" r="6.5" fill="#a78bd6"/>
+  </g>
+
+  <text x="272" y="98" class="name">Visual Assist</text>
+  <text x="272" y="132" class="desc">Help visually impaired users navigate their</text>
+  <text x="272" y="154" class="desc">environment safely and independently</text>
+</svg>
