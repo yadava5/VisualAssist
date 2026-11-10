@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Voice Commands** - Hands-free control for all app features
 - **Haptic Feedback** - Intuitive haptic patterns for proximity warnings
 - **Spatial Audio** - 3D audio positioning for detected objects
-- **Accessibility-First Design** - Full VoiceOver support and Dynamic Type
+- **Accessibility** - Labels and hints on the main views, and live status spoken independent of VoiceOver. Full VoiceOver support and Dynamic Type are planned, not in this build
 - **Settings Panel** - Customizable detection distances, speech rate, and feedback preferences
 
 ### Technical

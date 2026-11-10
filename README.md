@@ -588,9 +588,9 @@ VisualAssist/
 └── .github/workflows/               # ci, codeql, gitleaks, scorecard, release
 ```
 
-`Documentation.docc/Accessibility.md` and `CHANGELOG.md` still describe full VoiceOver support,
-Dynamic Type, a 44 pt minimum, Reduce Motion, spatial audio and Core ML object detection. Those
-documents are stale against this README and against the code; this README is the current statement.
+`Documentation.docc/Accessibility.md` now matches this README. `CHANGELOG.md` and
+`Documentation.docc/GettingStarted.md` still describe voice commands and spatial audio, and the
+changelog also Core ML object detection. Those documents are stale against this README and against the code; this README is the current statement.
 
 ---
 
